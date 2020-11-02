@@ -1,0 +1,39 @@
+#sabrina
+ALTER TABLE `inv_prod_codigo_stock`
+	ADD COLUMN `GTIN` VARCHAR(255) NOT NULL AFTER `codigo`;
+  
+#matias
+ALTER TABLE `pedidos_productos` CHANGE `id_pedido_producto` `id_pedido_producto` INT(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `pedidos_productos` CHANGE `id_pedido` `id_pedido` BIGINT(20) NULL DEFAULT NULL;
+ALTER TABLE `pedidos_pedidos` CHANGE `id_pedido` `id_pedido` BIGINT(20) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `pedidos_pedidos` CHANGE `id_usuario` `id_usuario` INT(11) NULL DEFAULT NULL;
+
+#matias
+CREATE TABLE `inv_productos_importar_meli` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id_usuario` int(10) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+
+ALTER TABLE `inv_productos` 
+ADD COLUMN `update_meli` TIMESTAMP NULL AFTER `estado_meli`;
+
+
+#matias
+ALTER TABLE `pedidos_pedidos` 
+CHANGE COLUMN `collection_id` `collection_id` VARCHAR(255) NULL DEFAULT NULL ;
+
+#franco
+ALTER TABLE `marcanto`.`pedidos_pedidos`
+ADD COLUMN `nombre` VARCHAR(255) NULL DEFAULT NULL AFTER `razon_social`,
+ADD COLUMN `telefono` VARCHAR(255) NULL DEFAULT NULL AFTER `nombre`,
+ADD COLUMN `facturado` INT(1) NULL DEFAULT 0 AFTER `acordar_envio`;
+
+ALTER TABLE `marcanto`.`editorial_notas`
+ADD COLUMN `sucursalEnvio` TINYINT(1) UNSIGNED NULL AFTER `destacado`;
+
+ALTER TABLE `marcanto`.`editorial_notas`
+CHANGE COLUMN `sucursalEnvio` `sucursalEnvio` TINYINT(1) UNSIGNED NULL DEFAULT 0 ;
